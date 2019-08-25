@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/mainpage.css') }}">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <title>Mars</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron" style="text-align: center">
+            <h1 class="display-4"><strong>Mission to Mars</strong></h1>
+            <a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row" style="text-align: center">
+            <div class="col-lg-12">
+                <h2> Latest Mars News</h2>
+                <h3>{{mars.news_title}}</h3>
+                <p> {{ mars.news_teaser }} </p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="card shadow-sm">
+                    <h2 style="text-align: center; color: pi">Featured Image</h2>
+                    <img class="img-fluid rounded" src={{ mars.featured_img_url}} alt="">
+                </div>
+            </div>
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-4 align-self-center">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Current Weather on Mars</h5>
+                        <p class="card-text"> {{ mars.mars_weather }} </p>
+                        <h5 class="card-title">Mars Facts</h5>
+                        <p>{{mars.mars_facts|safe}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                {% for hemisphere in mars.hemisphere_dict %}
+                <div class="col-lg-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title" style="text-align: center"> {{hemisphere.title}} </h5>
+                            <img class="img-fluid" src={{ hemisphere.img_url }} alt="">
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+</body>
+
+</html>
